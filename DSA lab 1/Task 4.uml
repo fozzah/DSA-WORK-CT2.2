@@ -1,0 +1,13 @@
+classDiagram
+direction TB
+class List {
+  +addItem(item)
+  +getItem(index)
+  +removeItem(index) 
+  +listSize() int
+  +isEmpty() bool
+  +clear()
+}
+
+List : -items
+List : -size
