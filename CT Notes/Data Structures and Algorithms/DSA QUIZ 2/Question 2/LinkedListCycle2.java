@@ -7,7 +7,7 @@ class ListNode {
     }
 }
 
-public class LinkedListCycle2 {
+public class LinkedListCycleStart {
     public ListNode detectCycle(ListNode head) {
         if (head == null || head.next == null) {
             return null;
@@ -16,20 +16,28 @@ public class LinkedListCycle2 {
         ListNode slow = head;
         ListNode fast = head;
 
+        // Detect cycle
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
-
             if (slow == fast) {
-                ListNode reset = head;
-                while (reset != slow) {
-                    reset = reset.next;
-                    slow = slow.next;
-                }
-                return reset;
+                break;
             }
         }
 
-        return null;
+        // No cycle found
+        if (fast == null || fast.next == null) {
+            return null;
+        }
+
+        // Find the starting point of the cycle
+        slow = head;
+        while (slow != fast) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        return slow;
     }
 }
+
